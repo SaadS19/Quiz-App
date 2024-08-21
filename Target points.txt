@@ -1,0 +1,155 @@
+Create a quiz app using 20 Question 
+2 Component
+place a timer to the whole app
+donot show the answer immediately, only show when the timmer is over or all questions have been answered
+result screen should be dynamic
+
+
+questions Arrays:questions: [
+                {
+                    question: "What is the capital of Japan?",
+                    options: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
+                    answerSelected: null,
+                    answer: "Tokyo",
+                },
+                {
+                    question: "Which element has the chemical symbol O?",
+                    options: ["Oxygen", "Gold", "Iron", "Osmium"],
+                    answerSelected: null,
+                    answer: "Oxygen",
+                },
+                {
+                    question: 'Who wrote "Romeo and Juliet"?',
+                    options: [
+                        "Charles Dickens",
+                        "Mark Twain",
+                        "William Shakespeare",
+                        "Leo Tolstoy",
+                    ],
+                    answerSelected: null,
+                    answer: "William Shakespeare",
+                },
+                {
+                    question: "What is the largest planet in our solar system?",
+                    options: ["Earth", "Jupiter", "Saturn", "Neptune"],
+
+                    answerSelected: null,
+                    answer: "Jupiter",
+                },
+                {
+                    question: "Which country is known as the Land of the Rising Sun?",
+                    options: ["China", "Australia", "Japan", "New Zealand"],
+
+                    answerSelected: null,
+                    answer: "Japan",
+                },
+                {
+                    question: "Who painted the Mona Lisa?",
+                    options: [
+                        "Vincent van Gogh",
+                        "Leonardo da Vinci",
+                        "Pablo Picasso",
+                        "Claude Monet",
+                    ],
+                    answerSelected: null,
+                    answer: "Leonardo da Vinci",
+                },
+                {
+                    question: "Which is the smallest ocean in the world?",
+                    options: [
+                        "Atlantic Ocean",
+                        "Indian Ocean",
+                        "Arctic Ocean",
+                        "Pacific Ocean",
+                    ],
+                    answerSelected: null,
+                    answer: "Arctic Ocean",
+                },
+                {
+                    question: "Which year did World War II end?",
+                    options: ["1941", "1945", "1948", "1950"],
+                    answerSelected: null,
+                    answer: "1945",
+                },
+                {
+                    question: 'Which planet is known as the "Evening Star"?',
+                    options: ["Mars", "Venus", "Mercury", "Saturn"],
+                    answerSelected: null,
+                    answer: "Venus",
+                },
+                {
+                    question: "What is the main ingredient in guacamole?",
+                    options: ["Tomato", "Avocado", "Pepper", "Onion"],
+                    answerSelected: null,
+                    answer: "Avocado",
+                },
+                {
+                    question: "Which country won the FIFA World Cup in 2018?",
+                    options: ["Germany", "Brazil", "France", "Argentina"],
+                    answerSelected: null,
+                    answer: "France",
+                },
+                {
+                    question: "Which planet has the most moons?",
+                    options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                    answerSelected: null,
+                    answer: "Saturn",
+                },
+                {
+                    question: "What is the hardest natural substance on Earth?",
+                    options: ["Gold", "Iron", "Diamond", "Platinum"],
+                    answerSelected: null,
+                    answer: "Diamond",
+                },
+                {
+                    question: "Which continent is the Sahara Desert located on?",
+                    options: ["Asia", "Africa", "Australia", "South America"],
+                    answerSelected: null,
+                    answer: "Africa",
+                },
+                {
+                    question: "Who discovered penicillin?",
+                    options: [
+                        "Marie Curie",
+                        "Albert Einstein",
+                        "Alexander Fleming",
+                        "Isaac Newton",
+                    ],
+                    answerSelected: null,
+                    answer: "Alexander Fleming",
+                },
+                {
+                    question: "What is the capital city of Australia?",
+                    options: ["Sydney", "Melbourne", "Brisbane", "Canberra"],
+                    answerSelected: null,
+                    answer: "Canberra",
+                },
+                {
+                    question: "Which gas do plants absorb from the atmosphere?",
+                    options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+                    answer: "Carbon Dioxide",
+                },
+                {
+                    question: "Who was the first man to walk on the moon?",
+                    options: [
+                        "Yuri Gagarin",
+                        "Neil Armstrong",
+                        "Buzz Aldrin",
+                        "Michael Collins",
+                    ],
+                    answerSelected: null,
+                    answer: "Neil Armstrong",
+                },
+                {
+                    question: "Which country is known as the Land of the Midnight Sun?",
+                    options: ["Norway", "Sweden", "Finland", "Iceland"],
+                    answerSelected: null,
+                    answer: "Norway",
+                },
+                {
+                    question: "What is the chemical symbol for water?",
+                    options: ["O2", "CO2", "H2O", "NaCl"],
+                    answerSelected: null,
+                    answer: "H2O",
+                },
+            ],
