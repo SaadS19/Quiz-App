@@ -32,10 +32,6 @@ export default {
     }
   },
   submitData(state) {
-    // const question = payload;
-    // let currQuestion = state.questions.findIndex(
-    //   (item) => item.id === question.id
-    // );
     let currQuestion = state.currentQuestion;
     const questionData = state.questions[currQuestion];
     if (state.selectedAnswer === questionData.answer) {
@@ -43,7 +39,7 @@ export default {
     }
     questionData.answerSelected = state.selectedAnswer;
     questionData.hasUpdate = true;
-    console.log(questionData);
+    // console.log(questionData);
 
     state.currentQuestion++;
     state.questions[state.currentQuestion];
