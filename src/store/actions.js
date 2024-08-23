@@ -1,13 +1,13 @@
 export default {
-  nextQuestion(context, payload) {
-    context.commit("nextQuestion", payload);
+  nextQuestion(context) {
+    context.commit("nextQuestion");
   },
-  previousQuestion(context, payload) {
-    context.commit("previousQuestion", payload);
+  previousQuestion(context) {
+    context.commit("previousQuestion");
   },
-  submitData(context, payload) {
+  submitData(context) {
     setTimeout(() => {
-      context.commit("submitData", payload);
+      context.commit("submitData");
     }, 500);
   },
   increaseCurrentQuestion(context) {

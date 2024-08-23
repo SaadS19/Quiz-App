@@ -1,9 +1,6 @@
 export default {
-  nextQuestion(state, payload) {
-    const question = payload;
-    let currQuestion = state.questions.findIndex(
-      (item) => item.id === question.id
-    );
+  nextQuestion(state) {
+    const currQuestion = state.currentQuestion;
     if (currQuestion < state.questions.length) {
       const data = state.questions[currQuestion];
       if (data?.hasUpdate) {
@@ -15,11 +12,8 @@ export default {
       }
     }
   },
-  previousQuestion(state, payload) {
-    const question = payload;
-    let currQuestion = state.questions.findIndex(
-      (item) => item.id === question.id
-    );
+  previousQuestion(state) {
+    const currQuestion = state.currentQuestion;
     if (currQuestion >= 0) {
       const data = state.questions[currQuestion];
       if (data.answerSelected) {
