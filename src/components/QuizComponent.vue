@@ -15,7 +15,6 @@
                 </v-radio-group>
             </v-card-actions>
             <v-card>
-                <v-card-title>Score is: {{ score }}</v-card-title>
                 <v-card-actions>
                     <v-col class="d-flex justify-center">
                         <v-btn @click="previousQuestion" :disabled="currentQuestion === 0">Previous</v-btn>
@@ -25,7 +24,7 @@
             </v-card>
         </v-card>
         <v-card v-else class="my-3">
-            <quiz-result :headers="headers" :score="score" :quiz="questions"></quiz-result>
+            <quiz-result :quiz="questions"></quiz-result>
         </v-card>
     </v-container>
 </template>
@@ -49,14 +48,8 @@ export default {
             const currentQuestion = this.$store.getters.currentQuestion;
             return currentQuestion + 1;
         },
-        headers() {
-            return this.$store.getters["headers"];
-        },
         disableOption() {
             return this.$store.getters["disableOption"];
-        },
-        score() {
-            return this.$store.getters["score"];
         },
         options() {
             const currentQuestion = this.$store.getters.currentQuestion;
