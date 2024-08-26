@@ -8,6 +8,7 @@ const store = createStore({
       currentQuestion: 0,
       selectedAnswer: null,
       score: 0,
+      timer: false,
       disableOption: false,
       questions: [
         {
@@ -46,7 +47,6 @@ const store = createStore({
         {
           question: "Which country is known as the Land of the Rising Sun?",
           options: ["China", "Australia", "Japan", "New Zealand"],
-
           answerSelected: null,
           hasUpdate: null,
           answer: "Japan",
@@ -98,14 +98,21 @@ const store = createStore({
         },
       ],
       headers: [
-        { key: "question", title: "Question", sortable: false },
-        { key: "options", title: "Options", sortable: false },
+        {
+          align: "center",
+          key: "question",
+          title: "Question",
+        },
+        { align: "center", key: "options", title: "Options" },
         {
           key: "answerSelected",
           title: "Choosen Answer",
-          sortable: false,
         },
-        { key: "answer", title: "Correct Answer", sortable: false },
+        {
+          key: "answer",
+          title: "Correct Answer",
+        },
+        // { key: "checkbox", title: "Checkbox", sortable: false },
       ],
     };
   },

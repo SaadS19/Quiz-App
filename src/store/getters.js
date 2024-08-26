@@ -17,4 +17,7 @@ export default {
   score(state) {
     return state.score;
   },
+  timer(state) {
+    return state.timer;
+  },
 };

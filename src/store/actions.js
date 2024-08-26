@@ -16,7 +16,10 @@ export default {
   resetQuiz(context) {
     context.commit("resetQuiz");
   },
-  showResult(context) {
-    context.commit("showResult");
+  // showResult(context) {
+  //   context.commit("showResult");
+  // },
+  startTimer(context) {
+    context.commit("startTimer");
   },
 };

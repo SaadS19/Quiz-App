@@ -1,5 +1,42 @@
 <template>
     <v-container>
+        <v-row>
+            <v-col cols="12" align="center">
+                <v-btn color="success" @click="startTimer">Start Timer</v-btn>
+            </v-col>
+        </v-row>
+        <v-row v-if="timer">
+            <v-col cols="12">
+                <v-card v-if="currentQuestion < questions.length" class="my-3">
+                    <v-card-title>
+                        Question {{ questionNo }} of {{ questions.length }}
+                    </v-card-title>
+                    <v-card-text>
+                        {{ questions[currentQuestion].question }}
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-radio-group :disabled="disableOption" v-model="selectedAnswer">
+                            <v-radio v-for="(option, index) in options" :key="index" :label="option" :value="option"
+                                @change="submitAnswer"></v-radio>
+                        </v-radio-group>
+                    </v-card-actions>
+                    <v-card>
+                        <v-card-actions>
+                            <v-col class="d-flex justify-center">
+                                <v-btn @click="previousQuestion" :disabled="currentQuestion === 0">Previous</v-btn>
+                                <v-btn @click="nextQuestion">Next</v-btn>
+                            </v-col>
+                        </v-card-actions>
+                    </v-card>
+                </v-card>
+                <quiz-result v-else :quiz="questions"></quiz-result>
+            </v-col>
+        </v-row>
+    </v-container>
+
+
+
+    <!-- <v-container>
         <h2>Student Name : M Saad Sohail</h2>
         <v-card v-if="currentQuestion < questions.length && !result" class="my-3">
             <v-card-title>
@@ -20,16 +57,11 @@
                         <v-btn @click="previousQuestion" :disabled="currentQuestion === 0">Previous</v-btn>
                         <v-btn @click="nextQuestion">Next</v-btn>
                     </v-col>
-                    <!-- <v-col>
-                        <v-btn @click="showResult">Submit</v-btn>
-                    </v-col> -->
                 </v-card-actions>
             </v-card>
         </v-card>
-        <v-card v-else class="my-3">
-            <quiz-result :quiz="questions"></quiz-result>
-        </v-card>
-    </v-container>
+        <quiz-result v-else :quiz="questions"></quiz-result>
+    </v-container> -->
 </template>
 <script>
 import QuizResult from "./QuizResult.vue";
@@ -59,13 +91,13 @@ export default {
             const question = this.$store.getters.questions;
             return question[currentQuestion].options
         },
-        result() {
-            return this.$store.getters.showResult;
+        timer() {
+            return this.$store.getters.timer;
         }
     },
     methods: {
-        showResult() {
-            this.$store.dispatch('showResult');
+        startTimer() {
+            this.$store.dispatch('startTimer')
         },
         submitAnswer($event) {
             const option = $event.target.value;
