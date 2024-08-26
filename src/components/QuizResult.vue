@@ -1,6 +1,27 @@
 <template>
-    <v-card-title>Quiz Result</v-card-title>
-    <v-data-table-virtual :headers="headers" :items="quiz"></v-data-table-virtual>
+    <!-- eslint-disable -->
+    <v-data-table-virtual :headers="headers" :items="quiz">
+        <template v-slot:top>
+            <v-toolbar flat>
+                <v-toolbar-title>Quiz Result</v-toolbar-title>
+            </v-toolbar>
+        </template>
+
+        <template v-slot:item.question="{ item }">
+            <div>{{ item.question }}</div>
+        </template>
+
+        <template v-slot:item.options="{ item }">
+            <div>{{ item.options }}</div>
+        </template>
+
+        <template v-slot:item.answerSelected="{ item }">
+            <v-chip :color="getColor(item)">
+                {{ item.answerSelected === null ? "Not selected" : item.answerSelected }}
+            </v-chip>
+        </template>
+
+    </v-data-table-virtual>
     <v-card-actions>
         <v-card flat>
             <v-card-item>
@@ -13,6 +34,7 @@
     </v-card-actions>
 </template>
 <script>
+/* eslint-disable */
 export default {
     props: {
         quiz: {
@@ -22,7 +44,7 @@ export default {
     },
     computed: {
         score() {
-            return this.$store.getters.score
+            return this.$store.getters.score;
         },
         headers() {
             return this.$store.getters["headers"];
@@ -30,8 +52,15 @@ export default {
     },
     methods: {
         resetQuiz() {
-            this.$store.dispatch('resetQuiz')
-        }
-    }
+            this.$store.dispatch("resetQuiz");
+        },
+        getColor(item) {
+            if (item.answerSelected === item.answer) {
+                return "green";
+            } else if (item.answerSelected !== item.answer) {
+                return "red";
+            }
+        },
+    },
 };
 </script>

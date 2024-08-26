@@ -11,7 +11,6 @@ const store = createStore({
       disableOption: false,
       questions: [
         {
-          id: 1,
           question: "What is the capital of Japan?",
           options: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
           answerSelected: null,
@@ -19,7 +18,6 @@ const store = createStore({
           answer: "Tokyo",
         },
         {
-          id: 2,
           question: "Which element has the chemical symbol O?",
           options: ["Oxygen", "Gold", "Iron", "Osmium"],
           answerSelected: null,
@@ -27,7 +25,6 @@ const store = createStore({
           answer: "Oxygen",
         },
         {
-          id: 3,
           question: 'Who wrote "Romeo and Juliet"?',
           options: [
             "Charles Dickens",
@@ -40,16 +37,13 @@ const store = createStore({
           answer: "William Shakespeare",
         },
         {
-          id: 4,
           question: "What is the largest planet in our solar system?",
           options: ["Earth", "Jupiter", "Saturn", "Neptune"],
-
           answerSelected: null,
           hasUpdate: null,
           answer: "Jupiter",
         },
         {
-          id: 5,
           question: "Which country is known as the Land of the Rising Sun?",
           options: ["China", "Australia", "Japan", "New Zealand"],
 
@@ -58,7 +52,6 @@ const store = createStore({
           answer: "Japan",
         },
         {
-          id: 6,
           question: "Who painted the Mona Lisa?",
           options: [
             "Vincent van Gogh",
@@ -71,7 +64,6 @@ const store = createStore({
           answer: "Leonardo da Vinci",
         },
         {
-          id: 7,
           question: "Which is the smallest ocean in the world?",
           options: [
             "Atlantic Ocean",
@@ -84,7 +76,6 @@ const store = createStore({
           answer: "Arctic Ocean",
         },
         {
-          id: 8,
           question: "Which year did World War II end?",
           options: ["1941", "1945", "1948", "1950"],
           answerSelected: null,
@@ -92,7 +83,6 @@ const store = createStore({
           answer: "1945",
         },
         {
-          id: 9,
           question: 'Which planet is known as the "Evening Star"?',
           options: ["Mars", "Venus", "Mercury", "Saturn"],
           answerSelected: null,
@@ -100,7 +90,6 @@ const store = createStore({
           answer: "Venus",
         },
         {
-          id: 10,
           question: "What is the main ingredient in guacamole?",
           options: ["Tomato", "Avocado", "Pepper", "Onion"],
           answerSelected: null,
@@ -109,7 +98,7 @@ const store = createStore({
         },
       ],
       headers: [
-        { align: "start", key: "question", title: "Question", sortable: false },
+        { key: "question", title: "Question", sortable: false },
         { key: "options", title: "Options", sortable: false },
         {
           key: "answerSelected",

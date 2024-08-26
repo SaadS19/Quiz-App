@@ -1,5 +1,6 @@
 export default {
   nextQuestion(state) {
+    state.currentQuestion++;
     const currQuestion = state.currentQuestion;
     if (currQuestion < state.questions.length) {
       const data = state.questions[currQuestion];
@@ -13,6 +14,7 @@ export default {
     }
   },
   previousQuestion(state) {
+    state.currentQuestion--;
     const currQuestion = state.currentQuestion;
     if (currQuestion >= 0) {
       const data = state.questions[currQuestion];
@@ -33,7 +35,6 @@ export default {
     }
     questionData.answerSelected = state.selectedAnswer;
     questionData.hasUpdate = true;
-    // console.log(questionData);
 
     state.currentQuestion++;
     state.questions[state.currentQuestion];
@@ -58,13 +59,7 @@ export default {
     state.currentQuestion = 0;
     state.score = 0;
   },
-  increaseCurrentQuestion(state) {
-    state.currentQuestion = state.currentQuestion + 1;
-  },
   setSelectedAnswer(state, payload) {
     state.selectedAnswer = payload.value;
-  },
-  decreaseCurrentQuestion(state) {
-    state.currentQuestion--;
   },
 };

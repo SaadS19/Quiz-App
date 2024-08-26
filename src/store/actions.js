@@ -10,16 +10,13 @@ export default {
       context.commit("submitData");
     }, 500);
   },
-  increaseCurrentQuestion(context) {
-    context.commit("increaseCurrentQuestion");
-  },
-  decreaseCurrentQuestion(context) {
-    context.commit("decreaseCurrentQuestion");
-  },
   setSelectedAnswer(context, payload) {
     context.commit("setSelectedAnswer", payload);
   },
   resetQuiz(context) {
     context.commit("resetQuiz");
+  },
+  showResult(context) {
+    context.commit("showResult");
   },
 };
