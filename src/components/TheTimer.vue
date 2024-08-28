@@ -1,41 +1,43 @@
 <template>
-    <section class="d-flexflex-col">
-        <v-col>{{ displayMinutes }}</v-col>
-        <span>:</span>
-        <v-col>
-            {{ displaySeconds }}
-        </v-col>
+    <section class="">
+        <v-row>
+            <v-col class=" text-h4">{{ minutes }} : {{ seconds }}</v-col>
+        </v-row>
     </section>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            displayMinutes: 0,
-            displaySeconds: 0
+    computed: {
+        minutes() {
+            return this.$store.getters.minutes;
+            // return this.$store.getters['timer/minutes'];
+        },
+        seconds() {
+            return this.$store.getters.seconds;
+            // return this.$store.getters['timer/seconds'];
         }
     },
     methods: {
         showTime() {
-            let timer = 60000;
-            const timerId = setTimeout(() => {
-                const minutes = timer / 60;
-                const seconds = timer % 60;
+            // const timerId = setInterval(() => {
+            //     console.log(this.timer)
+            //     let minutes = Math.floor(this.timer / 60);
+            //     let seconds = this.timer % 60;
 
-                this.displayMinutes = this.minutes < 10 ? '0' + minutes : minutes;
-                this.displaySeconds = this.seconds < 10 ? '0' + seconds : seconds;
-
-                if (--timer < 0) {
-                    clearInterval(timerId);
-                    console.log('Times Up')
-                    return;
-                }
-            }, 1000)
-        }
+            //     this.displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+            //     this.displaySeconds = seconds < 10 ? '0' + seconds : seconds;
+            //     if (--this.timer < 0) {
+            //         clearInterval(timerId);
+            //         console.log('Times Up')
+            //         return;
+            //     }
+            // }, 1000)
+            this.$store.dispatch('startTime')
+        },
     },
     created() {
         this.showTime();
-    }
+    },
 }
 </script>
