@@ -36,12 +36,11 @@ export default {
   },
   setHeader(context) {
     const questions = context.state.questions;
-    console.log(questions);
 
     const header = Object.keys(questions[0]).filter(
       (key) => key !== "hasUpdate"
     );
-    console.log(header);
+    // console.log(header);
 
     const filteredHeader = header.map((key) => ({
       title:

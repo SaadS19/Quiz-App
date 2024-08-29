@@ -20,7 +20,6 @@ const store = createStore({
           question: "What is the capital of Japan?",
           options: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
           answerSelected: null,
-          checkbox: true,
           hasUpdate: null,
           answer: "Tokyo",
         },
