@@ -70,4 +70,7 @@ export default {
     console.log("set Question");
     state.currentQuestion = state.currentQuestion + state.questions.length;
   },
+  setHeader(state, payload) {
+    state.headers = payload;
+  },
 };

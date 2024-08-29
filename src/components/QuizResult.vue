@@ -1,7 +1,7 @@
 <template>
     <!-- eslint-disable -->
     <v-card>
-        <v-data-table-virtual item-key="question" :headers="headers" :items="quiz">
+        <v-data-table-virtual item-key="question" :headers="headers" :items="questions">
             <template v-slot:top>
                 <v-toolbar flat>
                     <v-toolbar-title>Quiz Result</v-toolbar-title>
@@ -31,7 +31,7 @@
         <v-card-actions>
             <v-card flat>
                 <v-card-item>
-                    <v-card-title class="text-h5">Score is: {{ score }} / {{ quiz.length }}</v-card-title>
+                    <v-card-title class="text-h5">Score is: {{ score }} / {{ questions.length }}</v-card-title>
                 </v-card-item>
                 <v-card-actions>
                     <v-btn block @click="resetQuiz"> Reset Quiz </v-btn>
@@ -41,14 +41,7 @@
     </v-card>
 </template>
 <script>
-/* eslint-disable */
 export default {
-    props: {
-        quiz: {
-            type: Array,
-            default: null,
-        },
-    },
     computed: {
         score() {
             return this.$store.getters.score;
@@ -56,6 +49,9 @@ export default {
         headers() {
             return this.$store.getters["headers"];
         },
+        questions() {
+            return this.$store.getters['questions'];
+        }
     },
     methods: {
         resetQuiz() {
@@ -68,6 +64,12 @@ export default {
                 return "red";
             }
         },
+        setHeader() {
+            this.$store.dispatch('setHeader');
+        }
     },
+    mounted() {
+        this.setHeader();
+    }
 };
 </script>

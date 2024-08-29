@@ -34,4 +34,21 @@ export default {
   toggleTimer(context) {
     context.commit("timer");
   },
+  setHeader(context) {
+    const questions = context.state.questions;
+    console.log(questions);
+
+    const header = Object.keys(questions[0]).filter(
+      (key) => key !== "hasUpdate"
+    );
+    console.log(header);
+
+    const filteredHeader = header.map((key) => ({
+      title:
+        key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, " $1"), // Format key as title
+      key: key, // Use the key as the value
+    }));
+
+    context.commit("setHeader", filteredHeader);
+  },
 };

@@ -13,7 +13,6 @@ const store = createStore({
       currentQuestion: 0,
       selectedAnswer: null,
       score: 0,
-      quizCompleted: false,
       timer: false,
       disableOption: false,
       questions: [
@@ -21,6 +20,7 @@ const store = createStore({
           question: "What is the capital of Japan?",
           options: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
           answerSelected: null,
+          checkbox: true,
           hasUpdate: null,
           answer: "Tokyo",
         },
@@ -93,6 +93,7 @@ const store = createStore({
           options: ["Mars", "Venus", "Mercury", "Saturn"],
           answerSelected: null,
           hasUpdate: null,
+          checkbox: true,
           answer: "Venus",
         },
         {
@@ -103,23 +104,7 @@ const store = createStore({
           answer: "Avocado",
         },
       ],
-      headers: [
-        {
-          align: "center",
-          key: "question",
-          title: "Question",
-        },
-        { align: "center", key: "options", title: "Options" },
-        {
-          key: "answerSelected",
-          title: "Choosen Answer",
-        },
-        {
-          key: "answer",
-          title: "Correct Answer",
-        },
-        // { key: "checkbox", title: "Checkbox", sortable: false },
-      ],
+      headers: [],
     };
   },
   mutations: mutations,

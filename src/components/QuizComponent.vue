@@ -30,7 +30,7 @@
                         </v-card-actions>
                     </v-card>
                 </v-card>
-                <quiz-result v-else :quiz="questions"></quiz-result>
+                <quiz-result v-else></quiz-result>
             </v-col>
         </v-row>
     </v-container>
