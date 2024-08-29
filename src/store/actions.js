@@ -43,9 +43,8 @@ export default {
     // console.log(header);
 
     const filteredHeader = header.map((key) => ({
-      title:
-        key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, " $1"), // Format key as title
-      key: key, // Use the key as the value
+      title: key.charAt(0).toUpperCase() + key.slice(1),
+      key: key,
     }));
 
     context.commit("setHeader", filteredHeader);
