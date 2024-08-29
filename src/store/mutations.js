@@ -1,7 +1,6 @@
 export default {
   nextQuestion(state) {
     state.currentQuestion++;
-    console.log(state.currentQuestion);
     const currQuestion = state.currentQuestion;
     if (currQuestion < state.questions.length) {
       const data = state.questions[currQuestion];
@@ -62,28 +61,13 @@ export default {
     state.timer = false;
   },
   setSelectedAnswer(state, payload) {
-    state.selectedAnswer = payload.value;
+    state.selectedAnswer = payload;
   },
   timer(state) {
-    state.timer = true;
+    state.timer = !state.timer;
   },
-  startTime(state) {
-    let timer = state.time;
-    console.log(timer);
-
-    let minutes = Math.floor(timer / 60);
-    let seconds = timer % 60;
-
-    state.minutes = minutes < 10 ? "0" + minutes : minutes;
-    state.seconds = seconds < 10 ? "0" + seconds : seconds;
-
-    state.time--;
-  },
-  setTimer(state, payload) {
-    state.timer = payload;
-  },
-  stopTimer(state) {
-    state.time = 0;
-    state.currQuestion = state.questions.length + state.questions.length;
+  setCurrentQuestion(state) {
+    console.log("set Question");
+    state.currentQuestion = state.currentQuestion + state.questions.length;
   },
 };

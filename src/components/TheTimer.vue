@@ -1,43 +1,38 @@
 <template>
-    <section class="">
-        <v-row>
-            <v-col class=" text-h4">{{ minutes }} : {{ seconds }}</v-col>
-        </v-row>
-    </section>
+    <v-col class="text-h4">
+        <p>{{ minutes }} : {{ seconds }}</p>
+    </v-col>
 </template>
 
 <script>
+
 export default {
+    name: 'CountdownTimer',
     computed: {
         minutes() {
-            return this.$store.getters.minutes;
-            // return this.$store.getters['timer/minutes'];
+            return this.$store.getters['count/minutes']
         },
         seconds() {
-            return this.$store.getters.seconds;
-            // return this.$store.getters['timer/seconds'];
+            return this.$store.getters['count/seconds']
         }
     },
     methods: {
-        showTime() {
-            // const timerId = setInterval(() => {
-            //     console.log(this.timer)
-            //     let minutes = Math.floor(this.timer / 60);
-            //     let seconds = this.timer % 60;
-
-            //     this.displayMinutes = minutes < 10 ? '0' + minutes : minutes;
-            //     this.displaySeconds = seconds < 10 ? '0' + seconds : seconds;
-            //     if (--this.timer < 0) {
-            //         clearInterval(timerId);
-            //         console.log('Times Up')
-            //         return;
-            //     }
-            // }, 1000)
-            this.$store.dispatch('startTime')
+        initializeTimer() {
+            this.$store.dispatch('count/initializeTime')
         },
+        startTimer() {
+            this.$store.dispatch('count/startTimer')
+        },
+        stopTimer() {
+            this.$store.dispatch('count/stopTimer')
+        }
     },
-    created() {
-        this.showTime();
+    mounted() {
+        this.initializeTimer();
+        this.startTimer();
     },
-}
+    beforeUnmount() {
+        this.stopTimer();
+    },
+};
 </script>

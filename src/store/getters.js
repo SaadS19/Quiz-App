@@ -20,13 +20,4 @@ export default {
   timer(state) {
     return state.timer;
   },
-  time(state) {
-    return state.time;
-  },
-  minutes(state) {
-    return state.minutes;
-  },
-  seconds(state) {
-    return state.seconds;
-  },
 };

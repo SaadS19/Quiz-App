@@ -2,7 +2,7 @@
     <v-container>
         <v-row>
             <v-col cols="12" align="center">
-                <v-btn color="success" v-if="!timer" @click="toggleTimer">Start Timer</v-btn>
+                <v-btn color="success" v-if="!timer" @click="toggleTimer">Start Quiz</v-btn>
                 <the-timer v-if="timer"></the-timer>
             </v-col>
         </v-row>
@@ -74,8 +74,8 @@ export default {
             this.$store.dispatch("toggleTimer");
         },
         submitAnswer($event) {
-            const option = $event.target.value;
-            this.$store.dispatch("setSelectedAnswer", { value: option });
+            const answer = $event.target.value;
+            this.$store.dispatch("setSelectedAnswer", answer);
             this.$store.dispatch("submitData");
         },
         nextQuestion() {

@@ -2,21 +2,19 @@ import { createStore } from "vuex";
 import getters from "./getters";
 import actions from "./actions";
 import mutations from "./mutations";
-// import countdown from "./countdown/index.js";
+
+import countModule from "./countdown/index.js";
 const store = createStore({
-  // modules: {
-  //   timer: countdown,
-  // },
+  modules: {
+    count: countModule,
+  },
   state() {
     return {
       currentQuestion: 0,
       selectedAnswer: null,
       score: 0,
+      quizCompleted: false,
       timer: false,
-      time: 60,
-      minutes: null,
-      seconds: null,
-      intervalId: null,
       disableOption: false,
       questions: [
         {

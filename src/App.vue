@@ -17,9 +17,5 @@ export default {
     TheHeader,
     QuizComponent
   },
-
-  data: () => ({
-    //
-  }),
 }
 </script>
