@@ -4,7 +4,8 @@ export default {
     const currQuestion = state.currentQuestion;
     if (currQuestion < state.questions.length) {
       const data = state.questions[currQuestion];
-      if (data?.hasUpdate) {
+      console.log(data);
+      if (data.hasUpdate === true) {
         state.disableOption = true;
         state.selectedAnswer = data.answerSelected;
       } else {
@@ -36,20 +37,21 @@ export default {
     questionData.answerSelected = state.selectedAnswer;
     questionData.hasUpdate = true;
 
-    state.currentQuestion++;
-    state.questions[state.currentQuestion];
-    if (state.currentQuestion < state.questions.length) {
-      state.selectedAnswer =
-        state.questions[state.currentQuestion]?.answerSelected;
-      const data = state.questions[state.currentQuestion];
-      if (data.hasUpdate === true) {
-        state.disableOption = true;
-        state.selectedAnswer = data.answerSelected;
-      } else if (data.hasUpdate === null) {
-        state.disableOption = false;
-        state.selectedAnswer = null;
-      }
-    }
+    console.log(questionData);
+    // state.currentQuestion++;
+    // state.questions[state.currentQuestion];
+    // if (state.currentQuestion < state.questions.length) {
+    //   state.selectedAnswer =
+    //     state.questions[state.currentQuestion]?.answerSelected;
+    //   const data = state.questions[state.currentQuestion];
+    //   if (data.hasUpdate === true) {
+    //     state.disableOption = true;
+    //     state.selectedAnswer = data.answerSelected;
+    //   } else if (data.hasUpdate === null) {
+    //     state.disableOption = false;
+    //     state.selectedAnswer = null;
+    //   }
+    // }
   },
   resetQuiz(state) {
     state.questions.forEach((element) => {
