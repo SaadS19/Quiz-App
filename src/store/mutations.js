@@ -34,24 +34,9 @@ export default {
     if (state.selectedAnswer === questionData.answer) {
       state.score++;
     }
+    console.log(state.selectedAnswer);
     questionData.answerSelected = state.selectedAnswer;
     questionData.hasUpdate = true;
-
-    console.log(questionData);
-    // state.currentQuestion++;
-    // state.questions[state.currentQuestion];
-    // if (state.currentQuestion < state.questions.length) {
-    //   state.selectedAnswer =
-    //     state.questions[state.currentQuestion]?.answerSelected;
-    //   const data = state.questions[state.currentQuestion];
-    //   if (data.hasUpdate === true) {
-    //     state.disableOption = true;
-    //     state.selectedAnswer = data.answerSelected;
-    //   } else if (data.hasUpdate === null) {
-    //     state.disableOption = false;
-    //     state.selectedAnswer = null;
-    //   }
-    // }
   },
   resetQuiz(state) {
     state.questions.forEach((element) => {
