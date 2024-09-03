@@ -1,5 +1,6 @@
 <template>
-    <v-container fluid>
+    <!-- eslint-disable -->
+    <v-container fluid class="d-flex flex-column pa-0">
         <v-row no-gutters>
             <v-col cols="12" align="center" class="mt-2">
                 <v-btn color="success" v-if="!timer" @click="toggleTimer">Start Quiz</v-btn>
@@ -8,58 +9,61 @@
         </v-row>
         <v-row v-if="timer">
             <v-col cols="12">
-                <v-card v-if="currentQuestion < questions.length">
-                    <v-card-title class="text-h5 mb-4">Question {{ questionNo }} of {{ questions.length
+                <div v-if="currentQuestion < questions.length" class="d-flex flex-column justify-space-between">
+                    <v-card class="d-flex flex-column" :style="{ height: height }">
+                        <v-card-title class="text-h4 text-md-h3">Question {{ questionNo }} of {{
+                            questions.length
                         }}</v-card-title>
-                    <v-card-text>{{ questions[currentQuestion].question }}</v-card-text>
-                    <v-card-actions>
-                        <v-radio-group :disabled="disableOption" v-model="selectedAnswer">
-                            <v-radio v-for="(option, index) in options" :key="index" :label="option" :value="option"
-                                @click="submitAnswer"></v-radio>
-                        </v-radio-group>
-                    </v-card-actions>
-                    <v-card-actions>
-                        <v-col class="d-flex justify-center pa-0">
+                        <v-card-text class="text-h5 text-md-h4">{{ questions[currentQuestion].question
+                            }}</v-card-text>
+                        <v-card-actions class="">
+                            <v-radio-group class="" :disabled="disableOption" v-model="selectedAnswer">
+                                <v-radio class="" v-for="(option, index) in options" :key="index" :label="option"
+                                    :value="option" @click="submitAnswer"></v-radio>
+                            </v-radio-group>
+                        </v-card-actions>
+                        <v-card-actions class="d-flex justify-center">
                             <v-btn @click="previousQuestion" :disabled="currentQuestion === 0">Previous</v-btn>
                             <v-btn @click="nextQuestion">Next</v-btn>
-                        </v-col>
-                    </v-card-actions>
-                </v-card>
-                <quiz-result :headers="header" :items="questions" :actionsHeader="true" :checkbox="false" v-else>
-                    <template #header-question>
-                        <strong style="color: teal;">Question</strong>
-                    </template>
-                    <template #header-options>
-                        <strong style="color: teal;">Options</strong>
-                    </template>
-                    <template #header-answerSelected>
-                        <strong style="color: teal;">Chosen Answer</strong>
-                    </template>
-                    <template #header-answer>
-                        <strong style="color: teal;">Correct Answer</strong>
-                    </template>
-                    <template #cell-question="{ item }">
-                        <p>{{ item.question }}</p>
-                    </template>
-                    <template #cell-options="{ item }">
-                        {{ item.options.join(' , ') }}
-                    </template>
-                    <template #cell-answerSelected="{ item }">
-                        <span>{{ item.answerSelected || 'Not Answered' }}</span>
-                    </template>
-                    <template #cell-answer="{ item }">
-                        <span>{{ item.answer }}</span>
-                    </template>
+                        </v-card-actions>
+                    </v-card>
+                </div>
+                <div v-else>
+                    <quiz-result :headers="header" :items="questions" :actions="true">
+                        <template #header.question>
+                            <strong>Custom Question Header</strong>
+                        </template>
+                        <template #header.options>
+                            <em>Custom Options Header</em>
+                        </template>
+                        <template #header.answerSelected>
+                            <span>Custom Chosen Answer Header</span>
+                        </template>
+                        <template #header.answer>
+                            <em>Custom Correct Answer Header</em>
+                        </template>
+                        <template #header.actions>
+                            <em>Custom Actions Header</em>
+                        </template>
 
-                    <!-- <template v-slot:checkbox="{ item }">
-                        <v-checkbox v-model="selectedItems" :value="item.id" />
-                    </template> -->
-
-                    <template v-slot:custom-actions="{ item }">
-                        <v-icon class="me-2" @click="editItem(item)">mdi-pencil</v-icon>
-                        <v-icon @click="deleteItem(item)">mdi-delete</v-icon>
-                    </template>
-                </quiz-result>
+                        <template #column.options="{ item }">
+                            <em>{{ item.options.join(' , ') }}</em>
+                        </template>
+                        <template #column.question="{ item }">
+                            <em>{{ item.question }}</em>
+                        </template>
+                        <template #column.answerSelected="{ item }">
+                            <em>{{ item.answerSelected }}</em>
+                        </template>
+                        <template #column.answer="{ item }">
+                            <em>{{ item.answer }}</em>
+                        </template>
+                        <template #cell.actions="{ item }">
+                            <v-btn class="me-2" @click="customEdit(item)" prepend-icon="mdi-pencil">
+                            </v-btn>
+                        </template>
+                    </quiz-result>
+                </div>
             </v-col>
         </v-row>
     </v-container>
@@ -69,6 +73,8 @@
 <script>
 import QuizResult from "./QuizResult.vue";
 import TheTimer from "./TheTimer.vue";
+import { useDisplay } from "vuetify";
+import { computed } from "vue";
 export default {
     components: {
         QuizResult,
@@ -140,11 +146,39 @@ export default {
                 },
                 {
                     key: 'answer',
-                    title: 'Correct Answer',
-                },
-
-            ]
+                    title: 'Answer'
+                }
+            ],
         }
     },
-};
+    setup() {
+        const { name } = useDisplay();
+
+        const height = computed(() => {
+            // console.log(name._object.height)
+            const displayHeight = name._object.height;
+            console.log(displayHeight)
+            if (450 > displayHeight) return "50vh";
+            else if (displayHeight >= 450 && displayHeight < 500) return "60vh";
+            else if (displayHeight >= 500 && displayHeight < 550) return "60vh";
+            else if (displayHeight >= 550 && displayHeight < 600) return "60vh";
+            else if (displayHeight >= 600 && displayHeight < 650) return "68vh";
+            else if (displayHeight >= 650 && displayHeight < 700) return "70vh";
+            else if (displayHeight >= 700 && displayHeight < 750) return "73vh";
+            else if (displayHeight >= 750 && displayHeight < 850) return "73vh";
+            else if (displayHeight >= 850 && displayHeight < 950) return "80vh";
+            else if (displayHeight >= 950 && displayHeight < 1000) return "80vh";
+            else if (displayHeight >= 1000 && displayHeight < 1280) return "80vh";
+            else if (displayHeight >= 1280) return "83vh";
+            else return "10vh";
+        });
+        //   console.log(height.value)
+        return { height };
+    }
+}
 </script>
+<style>
+.v-label {
+    font-size: 2rem
+}
+</style>

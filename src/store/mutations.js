@@ -53,11 +53,15 @@ export default {
   timer(state) {
     state.timer = !state.timer;
   },
-  setCurrentQuestion(state) {
+  setCurrentQuestion(state, payload) {
     console.log("set Question");
-    state.currentQuestion = state.currentQuestion + state.questions.length;
+    if (payload === 0) {
+      state.currentQuestion = payload;
+    } else {
+      state.currentQuestion = state.currentQuestion + state.questions.length;
+    }
   },
-  setHeader(state, payload) {
-    state.headers = payload;
+  setTimer(state) {
+    state.timer = false;
   },
 };

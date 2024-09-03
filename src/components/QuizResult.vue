@@ -1,49 +1,41 @@
 <template>
-    <!--  eslint-disable  -->
     <v-card>
-        <v-card-title class="d-flex align-center pe-2">Quiz Result</v-card-title>
-        <v-data-table>
-            <thead>
-                <tr>
-                    <th v-for="header in headers" :key="header.key" :style="{ textAlign: header.align || 'left' }">
-                        <slot :name="`header-${header.key}`">{{ header.title }}</slot>
-                    </th>
+        <!-- eslint-disable  -->
+        <v-card-title>Quiz Result</v-card-title>
+        <v-data-table :headers="computedHeaders" :items="items" hide-default-footer>
+            <template v-for="header in headers" :key="header.key" v-slot:[`header.${header.key}`]="{ column }">
+                <template v-if="$slots[`header.${header.key}`]">
+                    <slot :name="`header.${header.key}`" :item="column" />
+                </template>
+                <template v-else>
+                    <span>{{ header.title }}</span>
+                </template>
+            </template>
 
-                    <th v-if="checkbox" style="color: teal;">
-                        Chekbox
-                    </th>
-                    <th v-if="actionsHeader" style="color: teal;">
-                        Actions
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- <tr v-for="item in items" :key="item.id">
-                    <td v-for="header in headers" :key="header.key" :style="{ textAlign: header.align || 'left' }">
-                        <slot :name="`cell-${header.key}`" :item="item">
-                            {{ item[header.key] }}
-                        </slot>
-                    </td>
-                </tr> -->
+            <template v-for="header in headers" :key="header.key" v-slot:[`item.${header.key}`]="{ item }">
+                <v-row>
+                    <v-col>
+                        <template v-if="$slots[`column.${header.key}`]">
+                            <slot :name="`column.${header.key}`" :item="item" />
+                        </template>
 
-                <tr v-for="item in items" :key="item.id">
-                    <td v-for="header in headers" :key="header.key" :style="{ textAlign: header.align || 'left' }">
-                        <slot :name="`cell-${header.key}`" :item="item">
+                        <template v-else>
                             {{ item[header.key] }}
-                        </slot>
-                    </td>
-                    <td v-if="checkbox">
-                        <slot name="checkbox" :item="item" />
-                    </td>
-                    <td v-if="actionsHeader">
-                        <slot name="custom-actions" :item="item" />
-                    </td>
-                </tr>
-            </tbody>
+                        </template>
+                    </v-col>
+                </v-row>
+            </template>
         </v-data-table>
+        <v-card-text>Your Score is : {{ score }} / {{ questions.length }}</v-card-text>
+        <v-card-actions>
+            <v-btn class="ms-2" @click="resetQuiz">Reset</v-btn>
+        </v-card-actions>
     </v-card>
 </template>
+
+
 <script>
+import { computed, ref } from 'vue';
 export default {
     props: {
         items: {
@@ -54,11 +46,7 @@ export default {
             type: Array,
             required: true,
         },
-        actionsHeader: {
-            type: Boolean,
-            default: false,
-        },
-        checkbox: {
+        actions: {
             type: Boolean,
             default: false
         }
@@ -66,31 +54,39 @@ export default {
     computed: {
         score() {
             return this.$store.getters.score;
-        },
-        // headers() {
-        //     return this.$store.getters["headers"];
-        // },
+        }
+        ,
         questions() {
-            return this.$store.getters['questions'];
+            return this.$store.getters.questions
         }
     },
     methods: {
         resetQuiz() {
-            this.$store.dispatch("resetQuiz");
-        },
-        getColor(item) {
-            if (item.answerSelected === item.answer) {
-                return "green";
-            } else if (item.answerSelected !== item.answer) {
-                return "red";
-            }
-        },
-        setHeader() {
-            this.$store.dispatch('setHeader');
+            console.log('clicked')
+            this.$store.dispatch('count/resetTimer')
         }
     },
-    mounted() {
-        this.setHeader();
+    unmounted() {
+        this.$store.dispatch('count/resetTimer')
+    },
+    setup(props) {
+        // Make headers reactive
+        const headers = ref(props.headers);
+
+        // Computed property for headers
+        const computedHeaders = computed(() => {
+            // Add actions column to headers if showActions is true
+            if (props.actions) {
+                const newHeader = [...headers.value, { key: 'actions', title: ' Actions' }];
+                console.log(newHeader);
+                return newHeader;
+            }
+            return headers.value;
+        });
+
+        return {
+            computedHeaders
+        };
     }
 };
 </script>
