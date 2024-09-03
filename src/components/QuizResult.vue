@@ -3,7 +3,7 @@
         <!-- eslint-disable  -->
         <v-card-title>Quiz Result</v-card-title>
         <v-data-table :headers="computedHeaders" :items="items" hide-default-footer>
-            <template v-for="header in headers" :key="header.key" v-slot:[`header.${header.key}`]="{ column }">
+            <template v-for="header in computedHeaders" :key="header.key" v-slot:[`header.${header.key}`]="{ column }">
                 <template v-if="$slots[`header.${header.key}`]">
                     <slot :name="`header.${header.key}`" :item="column" />
                 </template>
@@ -12,13 +12,12 @@
                 </template>
             </template>
 
-            <template v-for="header in headers" :key="header.key" v-slot:[`item.${header.key}`]="{ item }">
+            <template v-for="header in computedHeaders" :key="header.key" v-slot:[`item.${header.key}`]="{ item }">
                 <v-row>
                     <v-col>
                         <template v-if="$slots[`column.${header.key}`]">
                             <slot :name="`column.${header.key}`" :item="item" />
                         </template>
-
                         <template v-else>
                             {{ item[header.key] }}
                         </template>
@@ -26,13 +25,12 @@
                 </v-row>
             </template>
         </v-data-table>
-        <v-card-text>Your Score is : {{ score }} / {{ questions.length }}</v-card-text>
+        <v-card-text class="text-h5">Score : {{ score }} / {{ questions.length }}</v-card-text>
         <v-card-actions>
-            <v-btn class="ms-2" @click="resetQuiz">Reset</v-btn>
+            <v-btn class="ms-2" @click="resetQuiz">Reset Quiz</v-btn>
         </v-card-actions>
     </v-card>
 </template>
-
 
 <script>
 import { computed, ref } from 'vue';
@@ -54,15 +52,13 @@ export default {
     computed: {
         score() {
             return this.$store.getters.score;
-        }
-        ,
+        },
         questions() {
             return this.$store.getters.questions
         }
     },
     methods: {
         resetQuiz() {
-            console.log('clicked')
             this.$store.dispatch('count/resetTimer')
         }
     },
@@ -70,12 +66,9 @@ export default {
         this.$store.dispatch('count/resetTimer')
     },
     setup(props) {
-        // Make headers reactive
         const headers = ref(props.headers);
 
-        // Computed property for headers
         const computedHeaders = computed(() => {
-            // Add actions column to headers if showActions is true
             if (props.actions) {
                 const newHeader = [...headers.value, { key: 'actions', title: ' Actions' }];
                 console.log(newHeader);

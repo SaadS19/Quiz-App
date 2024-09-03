@@ -5,12 +5,12 @@ export default {
     if (currQuestion < state.questions.length) {
       const data = state.questions[currQuestion];
       console.log(data);
-      if (data.hasUpdate === true) {
+      if (data.timeDuration === 0) {
         state.disableOption = true;
         state.selectedAnswer = data.answerSelected;
       } else {
         state.disableOption = false;
-        state.selectedAnswer = null;
+        state.selectedAnswer = data.answerSelected;
       }
     }
   },
@@ -19,12 +19,13 @@ export default {
     const currQuestion = state.currentQuestion;
     if (currQuestion >= 0) {
       const data = state.questions[currQuestion];
-      if (data.answerSelected) {
+      console.log(data);
+      if (data.timeDuration === 0) {
         state.disableOption = true;
         state.selectedAnswer = data.answerSelected;
       } else {
         state.disableOption = false;
-        state.selectedAnswer = null;
+        state.selectedAnswer = data.answerSelected;
       }
     }
   },
@@ -42,6 +43,7 @@ export default {
     state.questions.forEach((element) => {
       element.answerSelected = null;
       element.hasUpdate = null;
+      element.timeDuration = 10;
     });
     state.currentQuestion = 0;
     state.score = 0;
@@ -63,5 +65,8 @@ export default {
   },
   setTimer(state) {
     state.timer = false;
+  },
+  setDisableProperty(state) {
+    state.disableOption = true;
   },
 };

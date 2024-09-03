@@ -1,8 +1,8 @@
 <template>
     <!-- eslint-disable -->
-    <v-container fluid class="d-flex flex-column pa-0">
+    <v-container fluid class="">
         <v-row no-gutters>
-            <v-col cols="12" align="center" class="mt-2">
+            <v-col cols="12" align="center" class="">
                 <v-btn color="success" v-if="!timer" @click="toggleTimer">Start Quiz</v-btn>
                 <the-timer v-if="timer"></the-timer>
             </v-col>
@@ -11,9 +11,9 @@
             <v-col cols="12">
                 <div v-if="currentQuestion < questions.length" class="d-flex flex-column justify-space-between">
                     <v-card class="d-flex flex-column" :style="{ height: height }">
-                        <v-card-title class="text-h4 text-md-h3">Question {{ questionNo }} of {{
+                        <v-card-title class="text-h4 text-md-h4 text-sm-h4">Question {{ questionNo }} of {{
                             questions.length
-                        }}</v-card-title>
+                            }}</v-card-title>
                         <v-card-text class="text-h5 text-md-h4">{{ questions[currentQuestion].question
                             }}</v-card-text>
                         <v-card-actions class="">
@@ -58,9 +58,14 @@
                         <template #column.answer="{ item }">
                             <em>{{ item.answer }}</em>
                         </template>
-                        <template #cell.actions="{ item }">
-                            <v-btn class="me-2" @click="customEdit(item)" prepend-icon="mdi-pencil">
-                            </v-btn>
+
+                        <template #column.actions="{ item }">
+                            <v-icon class="me-2" size="small" @click="editItem(item)">
+                                mdi-pencil
+                            </v-icon>
+                            <v-icon size="small" @click="deleteItem(item)">
+                                mdi-delete
+                            </v-icon>
                         </template>
                     </quiz-result>
                 </div>
@@ -108,6 +113,9 @@ export default {
         },
     },
     methods: {
+        questionTimer() {
+
+        },
         editItem(item) {
             console.log(item)
         },
@@ -116,6 +124,7 @@ export default {
         },
         toggleTimer() {
             this.$store.dispatch("toggleTimer");
+            this.$store.dispatch('setTimerQuestion')
         },
         submitAnswer($event) {
             const answer = $event.target.value;
@@ -162,15 +171,16 @@ export default {
             else if (displayHeight >= 450 && displayHeight < 500) return "60vh";
             else if (displayHeight >= 500 && displayHeight < 550) return "60vh";
             else if (displayHeight >= 550 && displayHeight < 600) return "60vh";
-            else if (displayHeight >= 600 && displayHeight < 650) return "68vh";
-            else if (displayHeight >= 650 && displayHeight < 700) return "70vh";
+            else if (displayHeight >= 600 && displayHeight < 650) return "72vh";
+            else if (displayHeight >= 650 && displayHeight < 700) return "71vh";
             else if (displayHeight >= 700 && displayHeight < 750) return "73vh";
-            else if (displayHeight >= 750 && displayHeight < 850) return "73vh";
-            else if (displayHeight >= 850 && displayHeight < 950) return "80vh";
+            else if (displayHeight >= 750 && displayHeight < 800) return "73vh";
+            else if (displayHeight >= 800 && displayHeight < 850) return "76vh";
+            else if (displayHeight >= 850 && displayHeight < 950) return "78vh";
             else if (displayHeight >= 950 && displayHeight < 1000) return "80vh";
-            else if (displayHeight >= 1000 && displayHeight < 1280) return "80vh";
-            else if (displayHeight >= 1280) return "83vh";
-            else return "10vh";
+            else if (displayHeight >= 1000 && displayHeight < 1280) return "83vh";
+            else if (displayHeight >= 1280) return "85vh";
+            else return "100vh";
         });
         //   console.log(height.value)
         return { height };

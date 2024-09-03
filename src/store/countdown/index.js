@@ -44,8 +44,7 @@ export default {
     },
     resetTimer(context) {
       context.commit("resetTimer");
-      context.commit("setCurrentQuestion", 0, { root: true });
-      context.commit("setTimer", null, { root: true });
+      context.commit("resetQuiz", null, { root: true });
     },
   },
   mutations: {

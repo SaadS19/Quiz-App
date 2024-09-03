@@ -22,6 +22,8 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "Tokyo",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: "Which element has the chemical symbol O?",
@@ -29,6 +31,8 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "Oxygen",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: 'Who wrote "Romeo and Juliet"?',
@@ -41,6 +45,8 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "William Shakespeare",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: "What is the largest planet in our solar system?",
@@ -48,6 +54,8 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "Jupiter",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: "Which country is known as the Land of the Rising Sun?",
@@ -55,6 +63,8 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "Japan",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: "Who painted the Mona Lisa?",
@@ -67,6 +77,8 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "Leonardo da Vinci",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: "Which is the smallest ocean in the world?",
@@ -79,6 +91,8 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "Arctic Ocean",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: "Which year did World War II end?",
@@ -86,6 +100,8 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "1945",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: 'Which planet is known as the "Evening Star"?',
@@ -94,6 +110,8 @@ const store = createStore({
           hasUpdate: null,
           checkbox: true,
           answer: "Venus",
+          timeDuration: 10,
+          interval: null,
         },
         {
           question: "What is the main ingredient in guacamole?",
@@ -101,9 +119,10 @@ const store = createStore({
           answerSelected: null,
           hasUpdate: null,
           answer: "Avocado",
+          timeDuration: 10,
+          interval: null,
         },
       ],
-      headers: [],
     };
   },
   mutations: mutations,
