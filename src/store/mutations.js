@@ -4,7 +4,7 @@ export default {
     const currQuestion = state.currentQuestion;
     if (currQuestion < state.questions.length) {
       const data = state.questions[currQuestion];
-      console.log(data);
+      // console.log(data);
       if (data.timeDuration === 0) {
         state.disableOption = true;
         state.selectedAnswer = data.answerSelected;
@@ -19,7 +19,7 @@ export default {
     const currQuestion = state.currentQuestion;
     if (currQuestion >= 0) {
       const data = state.questions[currQuestion];
-      console.log(data);
+      // console.log(data);
       if (data.timeDuration === 0) {
         state.disableOption = true;
         state.selectedAnswer = data.answerSelected;
@@ -35,7 +35,7 @@ export default {
     if (state.selectedAnswer === questionData.answer) {
       state.score++;
     }
-    console.log(state.selectedAnswer);
+    // console.log(state.selectedAnswer);
     questionData.answerSelected = state.selectedAnswer;
     questionData.hasUpdate = true;
   },
@@ -56,7 +56,6 @@ export default {
     state.timer = !state.timer;
   },
   setCurrentQuestion(state, payload) {
-    console.log("set Question");
     if (payload === 0) {
       state.currentQuestion = payload;
     } else {

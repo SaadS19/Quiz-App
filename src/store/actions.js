@@ -44,7 +44,7 @@ export default {
       question[currQuestion].interval = setInterval(() => {
         if (question[currQuestion].timeDuration > 0) {
           question[currQuestion].timeDuration--;
-          console.log(question[currQuestion].timeDuration);
+          // console.log(question[currQuestion].timeDuration);
         } else {
           context.commit("setDisableProperty");
           clearInterval(question[currQuestion].interval);
@@ -55,7 +55,7 @@ export default {
   stopTimer(context) {
     const currQuestion = context.state.currentQuestion;
     const question = context.state.questions;
-    console.log(question[currQuestion]);
+    // console.log(question[currQuestion]);
     const interval = question[currQuestion].interval;
     if (interval) {
       clearInterval(question[currQuestion].interval);

@@ -13,7 +13,7 @@
                     <v-card class="d-flex flex-column" :style="{ height: height }">
                         <v-card-title class="text-h4 text-md-h4 text-sm-h4">Question {{ questionNo }} of {{
                             questions.length
-                            }}</v-card-title>
+                        }}</v-card-title>
                         <v-card-text class="text-h5 text-md-h4">{{ questions[currentQuestion].question
                             }}</v-card-text>
                         <v-card-actions class="">
@@ -29,63 +29,85 @@
                     </v-card>
                 </div>
                 <div v-else>
-                    <quiz-result :headers="header" :items="questions" :actions="true">
-                        <template #header.question>
-                            <strong>Custom Question Header</strong>
-                        </template>
-                        <template #header.options>
-                            <em>Custom Options Header</em>
-                        </template>
-                        <template #header.answerSelected>
-                            <span>Custom Chosen Answer Header</span>
-                        </template>
-                        <template #header.answer>
-                            <em>Custom Correct Answer Header</em>
-                        </template>
-                        <template #header.actions>
-                            <em>Custom Actions Header</em>
+
+                    <data-table :header="ansinMeds.HEADER" :items="ansinMeds.ITEMS"
+                        :itemSlot="['header-id', 'header-date', 'header-patient.name', 'header-status', 'header-meds', 'id', 'date', 'patient', 'medications', 'status']">
+                        <template #header-id="{ column }">
+                            <div class="custom-header">Custom {{ column.text }}</div>
                         </template>
 
-                        <template #column.options="{ item }">
-                            <em>{{ item.options.join(' , ') }}</em>
-                        </template>
-                        <template #column.question="{ item }">
-                            <em>{{ item.question }}</em>
-                        </template>
-                        <template #column.answerSelected="{ item }">
-                            <em>{{ item.answerSelected }}</em>
-                        </template>
-                        <template #column.answer="{ item }">
-                            <em>{{ item.answer }}</em>
+                        <template #header-date="{ column }">
+                            <div class="custom-header ">Order: {{ column.text }}</div>
                         </template>
 
-                        <template #column.actions="{ item }">
-                            <v-icon class="me-2" size="small" @click="editItem(item)">
-                                mdi-pencil
-                            </v-icon>
-                            <v-icon size="small" @click="deleteItem(item)">
-                                mdi-delete
-                            </v-icon>
+                        <template #header-patient.name="{ column }">
+                            <div class="custom-header ">pName: {{ column.text }}</div>
                         </template>
-                    </quiz-result>
+
+                        <template #header-meds="{ column }">
+                            <div class="custom-header ">Meds: {{ column.text }}</div>
+                        </template>
+                        <template #header-status="{ column }">
+                            <div class="custom-header ">Status: {{ column.text }}</div>
+                        </template>
+
+                        <template #id="{ id }">
+                            <div class="me-2">
+                                <p><strong>Custom ID:</strong> {{ id }}</p>
+                            </div>
+                        </template>
+
+                        <template #date="{ date }">
+                            <div class="custom-date me-2">
+                                <h3>Custom Date: {{ date.split("@")[0] }}</h3>
+                            </div>
+                        </template>
+
+                        <template #patient="{ patient }">
+                            <div class="custom-patient me-2">
+                                <p><strong>Patient Name:</strong> {{ patient.name }}</p>
+                            </div>
+                        </template>
+
+                        <template #medications="{ medications }">
+                            <div class="custom-medications me-2">
+                                <h2>Medications:</h2>
+                                <ul>
+                                    <li v-for="medication in medications" :key="medication.id">
+                                        <strong>{{ medication.name }}</strong> - Qty: {{ medication.qty }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </template>
+
+                        <template #status="{ status }">
+                            <div class="custom-status me-3">
+                                <h2>Status:</h2>
+                                <ul>
+                                    <li v-for="statusItem in status" :key="statusItem.label">
+                                        {{ statusItem.label }} - Color: {{ statusItem.color || 'Not Provided' }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </template>
+                    </data-table>
+
                 </div>
             </v-col>
         </v-row>
     </v-container>
 </template>
 
-
 <script>
-import QuizResult from "./QuizResult.vue";
 import TheTimer from "./TheTimer.vue";
 import { useDisplay } from "vuetify";
 import { computed } from "vue";
+import DataTable from "./DataTable.vue";
 export default {
     components: {
-        QuizResult,
         TheTimer,
+        DataTable
     },
-
     computed: {
         currentQuestion() {
             return this.$store.getters["currentQuestion"];
@@ -113,9 +135,6 @@ export default {
         },
     },
     methods: {
-        questionTimer() {
-
-        },
         editItem(item) {
             console.log(item)
         },
@@ -137,27 +156,189 @@ export default {
         previousQuestion() {
             this.$store.dispatch("previousQuestion");
         },
+
     },
     data() {
         return {
-            header: [
-                {
-                    key: 'question',
-                    title: 'Question',
-                },
-                {
-                    key: 'options',
-                    title: 'Options',
-                },
-                {
-                    key: 'answerSelected',
-                    title: 'Chosen Answer',
-                },
-                {
-                    key: 'answer',
-                    title: 'Answer'
-                }
-            ],
+            "ansinMeds": {
+                "HEADER": [
+                    {
+                        "sortable": false,
+                        "text": "Id",
+                        "value": "id"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Order Date",
+                        "value": "date"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Patient",
+                        "value": "patient.name"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Pharmacy",
+                        "value": "pharmacy.name"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Status",
+                        "value": "status"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Address",
+                        "value": "proxyAddress"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Medications",
+                        "value": "meds"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "",
+                        "value": "proxyCreateShipping"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Next Address",
+                        "value": "ptAddress"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Medications",
+                        "value": "pfsMeds"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "",
+                        "value": "proxyPFSCreateShipping"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Next Address",
+                        "value": "pfsAddress"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "Ship Method",
+                        "value": "shipMethod"
+                    },
+                    {
+                        "sortable": false,
+                        "text": "",
+                        "value": "ACTION"
+                    }
+                ],
+                "ITEMS": [
+                    {
+                        "date": "8/29/2024@17:43",
+                        "editedPtAddress": "",
+                        "id": 37843,
+                        "invoiceId": 44420,
+                        "medications": [
+                            {
+                                "PFS": 0,
+                                "PFSReceived": 0,
+                                "PFSReceivedBy": "",
+                                "PFSReceivedDate": "",
+                                "comments": "",
+                                "deleted": 0,
+                                "deletedBy": "",
+                                "deletedDate": "",
+                                "deletedNotes": "",
+                                "duration": 84,
+                                "id": 608908,
+                                "ien": 1,
+                                "name": "SL-TIRZEPATIDE PLUS (TIRZEPATIDE/CYANOCOBALAMIN) 10MG/500MCG/ML, 2 ML VIAL INJ,SOLN",
+                                "notes": "",
+                                "pharmacyReceived": 1,
+                                "proxyReceived": 0,
+                                "proxyReceivedBy": "",
+                                "proxyReceivedDate": "",
+                                "qty": "3 VIAL(S)"
+                            }
+                        ],
+                        "meds": "SL-TIRZEPATIDE PLUS (TIRZEPATIDE/CYANOCOBALAMIN) 10MG/500MCG/ML, 2 ML VIAL INJ,SOLN",
+                        "oNotes": "",
+                        "patient": {
+                            "id": 4960,
+                            "name": "ESHKAR BUTBUL",
+                            "pfs": "",
+                            "shipping": {
+                                "city": "Calabasas",
+                                "state": "CA",
+                                "street": "4072 declaration ave",
+                                "street2": "",
+                                "zip": 91302
+                            }
+                        },
+                        "pfsAddress": "",
+                        "pfsMeds": "",
+                        "pharmacy": {
+                            "id": 13,
+                            "name": "SOUTH LAKE PHARMACY"
+                        },
+                        "pharmacyShipped": 0,
+                        "pharmacyShipping": {
+                            "deliveryDate": "",
+                            "expectedDeliveryDate": "9/3/2024",
+                            "shipFrom": "SL",
+                            "shipTo": "430 Ansin Blvd #430H, Hallandale Beach, FL 33009",
+                            "status": "S",
+                            "statusDescription": "shipment ready for ups",
+                            "timeDescription": "",
+                            "updateDate": "8/30/2024@16:49:52",
+                            "updatedBy": "RJ"
+                        },
+                        "pharmacyTracking": "1Z6A52R30127098280",
+                        "proxyAddress": "430 Ansin Blvd #430H, Hallandale Beach, FL 33009",
+                        "proxyPFSShipped": 0,
+                        "proxyPFSShipping": {
+                            "deliveryDate": "",
+                            "expectedDeliveryDate": "",
+                            "shipFrom": "",
+                            "shipTo": "",
+                            "status": 0,
+                            "statusDescription": "",
+                            "timeDescription": ""
+                        },
+                        "proxyPFSTracking": "",
+                        "proxyShipped": 0,
+                        "proxyShipping": {
+                            "deliveryDate": "",
+                            "expectedDeliveryDate": "",
+                            "shipFrom": "",
+                            "shipTo": "",
+                            "status": 0,
+                            "statusDescription": "",
+                            "timeDescription": ""
+                        },
+                        "proxyTracking": "",
+                        "ptAddress": "4072 declaration ave Calabasas CA 91302",
+                        "shipMethod": "STANDARD OVERNIGHT (BEFORE 4:30 PM)",
+                        "status": [
+                            {
+                                "color": "green",
+                                "label": "SL",
+                                "next": "green"
+                            },
+                            {
+                                "color": "",
+                                "label": "Ansin",
+                                "next": ""
+                            },
+                            {
+                                "color": "",
+                                "label": "PT"
+                            }
+                        ]
+                    }
+                ]
+            },
         }
     },
     setup() {
@@ -187,8 +368,27 @@ export default {
     }
 }
 </script>
+
 <style>
+.custom-header {
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-cell {
+    background-color: #f9f9f9;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+
 .v-label {
     font-size: 2rem
+}
+
+.custom-date,
+.custom-patient,
+.custom-medications,
+.custom-status {
+    margin-bottom: 10px;
 }
 </style>
